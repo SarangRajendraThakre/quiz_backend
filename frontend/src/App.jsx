@@ -7,7 +7,6 @@ import QuizComponent from "./QuizComponent";
 const App = () => {
   return (
     <div>
-      
       <QuizForm />
       <QuizComponent/>
     </div>

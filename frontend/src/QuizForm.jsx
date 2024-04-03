@@ -9,6 +9,11 @@ function QuizForm() {
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctAnswers, setCorrectAnswers] = useState([]);
   const [questionType, setQuestionType] = useState("");
+  const [image, setImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
 
   const addQuestion = () => {
     const newQuestion = {
@@ -26,9 +31,20 @@ function QuizForm() {
 
   const handleSubmit = async () => {
     try {
-      // Send quiz data to backend API including quizTitle
+      // Upload image
+      const formData = new FormData();
+      formData.append("image", image);
+      const response = await axios.post(
+        "http://localhost:3001/api/upload",
+        formData
+      );
+      const imagePath = response.data.imagePath;
+
+      // Send quiz data to backend API including quizTitle and imagePath
       await axios.post("http://localhost:3001/api/quizzes", {
-        title: quizTitle, // Ensure title is included here
+        title: quizTitle,
+        visibility: "public",
+        imagePath,
         questions,
       });
       alert("Quiz submitted successfully!");
@@ -51,6 +67,12 @@ function QuizForm() {
             onChange={(e) => setQuizTitle(e.target.value)}
             className="text-input"
           />
+        </div>
+
+        {/* Image upload input */}
+        <div className="input-container">
+          <label>Quiz Poster Image:</label>
+          <input type="file" accept="image/*" onChange={handleImageChange} />
         </div>
 
         {/* Question input */}

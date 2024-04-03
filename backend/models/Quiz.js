@@ -1,9 +1,9 @@
-// models/Quiz.js
-
 const mongoose = require("mongoose");
 
 const quizSchema = new mongoose.Schema({
   title: String,
+  visibility: { type: String, enum: ["public", "private"], default: "public" }, // Add visibility field
+  imagePath: String, // Add imagePath field for storing image path
   questions: [
     {
       questionText: String,

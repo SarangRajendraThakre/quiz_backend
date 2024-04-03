@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  height: 70%; /* Make the container full height of the viewport */
+   /* Make the container full height of the viewport */
 }
 
 .quiz-form {
@@ -30,7 +30,7 @@ body {
   justify-content: center;
   align-items: center;
 
-  height: 100vh;
+
 }
 
 .container {
